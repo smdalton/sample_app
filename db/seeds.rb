@@ -22,6 +22,8 @@ User.create!(
   User.create!(name: name,
                email: email,
                password: password,
-               password_confirmation: password_confirmation)
+               password_confirmation: password_confirmation,
+               activated: true,
+               activated_at: Time.zone.now)
   puts "creating user #{n + 1}" if (n % 5).zero?
 end

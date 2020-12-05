@@ -33,6 +33,14 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
+  host = 'localhost:3000'
+  # This makes sense, we are directly defining the action mailer objects url options with
+  # this proc block, really similar to python subclass and override techniques
+  # class mymailer(action_mailer):
+  #   host = host
+  #   protocol = https
+  # mail = mymailer.send_mail()
+  config.action_mailer.default_url_options = { host: host, protocol: 'http'}
 
   config.action_mailer.perform_caching = false
 

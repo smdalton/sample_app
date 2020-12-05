@@ -12,5 +12,9 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :users
-
+  resources :account_activations, only: [:edit]
 end
+
+#
+# PATH IS FOR RELATIVE URLS FROM THE BASE URL /route/:params
+# URL IS THE ENTIRE URL https://www.address.com/route/:params

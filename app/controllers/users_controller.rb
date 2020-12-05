@@ -25,10 +25,9 @@ class UsersController < ApplicationController
     # Rails takes the input from the form with name=user[email] and stores the email input into
     # the hash called user which is made available via params above after receiving the post
     if @user.save
-      reset_session
-      log_in @user
-      flash[:success] = 'Welcome to the Sample App!'
-      redirect_to @user
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = 'Please check your email to activate your account.'
+      redirect_to root_url
     else
       render 'new'
     end

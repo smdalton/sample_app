@@ -6,7 +6,8 @@ class UserTest < ActiveSupport::TestCase
         name: 'example user',
         email: 'user@user.com',
         password: 'foobar',
-        password_confirmation: 'foobar')
+        password_confirmation: 'foobar'
+    )
   end
 
   test 'should be valid' do
@@ -24,7 +25,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'name should not be too long' do
-    @user.name = 'a'* 51
+    @user.name = 'a' * 51
     assert_not @user.valid?
   end
 
@@ -35,7 +36,7 @@ class UserTest < ActiveSupport::TestCase
 
   test 'email validation should accept valid addresses' do
     valid_addresses = %w[fredped jeffnbeff racystacy]
-                      .map { |i| i + '@gmail.com' }
+                          .map { |i| i + '@gmail.com' }
 
     valid_addresses.each do |valid_address|
       @user.email = valid_address
@@ -43,7 +44,7 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-  test "email validation should reject invalid addresses" do
+  test 'email validation should reject invalid addresses' do
     invalid_addresses = %w[user@example,com user_at_foo.org user.name@example.
                            foo@bar_baz.com foo@bar+baz.com foo@bar..com]
     invalid_addresses.each do |invalid_address|
@@ -52,30 +53,30 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-  test "email addresses should be unique" do
+  test 'email addresses should be unique' do
     duplicate_user = @user.dup
     @user.save
     assert_not duplicate_user.valid?
   end
 
-  test "email addresses should be saved as lower case" do
-    mixed_email = "Foo@ExamPle.Com"
+  test 'email addresses should be saved as lower case' do
+    mixed_email = 'Foo@ExamPle.Com'
     @user.email = mixed_email
     @user.save
     assert_equal mixed_email.downcase, @user.reload.email
   end
 
-  test "password should be present (nonblank)" do
-    @user.password = @user.password_confirmation = " " * 6
+  test 'password should be present (nonblank)' do
+    @user.password = @user.password_confirmation = ' ' * 6
     assert_not @user.valid?
   end
 
-  test "password should have minimum length" do
-    @user.password = @user.password_confirmation =  'a' * 5
+  test 'password should have minimum length' do
+    @user.password = @user.password_confirmation = 'a' * 5
     assert_not @user.valid?
   end
 
   test 'authenticated? should return false for a user with nil digest' do
-    assert_not @user.authenticated?('')
+    assert_not @user.authenticated?(:remember, '')
   end
 end
