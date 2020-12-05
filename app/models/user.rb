@@ -26,6 +26,13 @@ class User < ApplicationRecord
     remember_digest || remember
   end
 
+  def activate
+    update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
 
 
   def authenticated?(attribute, token)
