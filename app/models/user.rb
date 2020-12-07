@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 
   # attr_accessor allows us to directly modify the models fields
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :reset_token
   before_save { self.email = email.downcase }
   before_create :create_activation_digest
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -34,11 +34,21 @@ class User < ApplicationRecord
     UserMailer.account_activation(self).deliver_now
   end
 
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
 
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
     return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
+  end
+
+
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_attribute(:reset_token, User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
   end
 
   private
