@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     if @user.save
       # @user.send_activation_email
       @user.activate
+      log_in @user
       flash[:info] = 'Account activated'
       redirect_to root_url
     else
