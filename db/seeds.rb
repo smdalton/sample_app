@@ -14,7 +14,18 @@ User.create!(
   admin: true
 )
 
-99.times do |n|
+User.create!(
+    name: 'Shane Dalton',
+    email: 'shanemdalton@gmail.com',
+    password: 'password',
+    password_confirmation: 'password',
+    admin: true,
+    activated: true
+)
+
+users = User.order(:created_at).take(6)
+
+20.times do |n|
   name = Faker::Name.name
   email = "example-#{n + 1}@railstutorial.org"
   password = 'password'
@@ -27,3 +38,10 @@ User.create!(
                activated_at: Time.zone.now)
   puts "creating user #{n + 1}" if (n % 5).zero?
 end
+
+50.times do |n|
+  content = Faker::Hipster.sentence(word_count: 8)
+  users.each { |user| user.microposts.create!(content: content) }
+  puts " creating micropost batch to: #{n * 50}" if (n % 5).zero?
+end
+
