@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class UsersIndexTest < ActionDispatch::IntegrationTest
@@ -31,7 +33,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "index as non-admin" do
+  test 'index as non-admin' do
     log_in_as(@non_admin)
     get users_path
     assert_select 'a', text: 'delete', count: 0
@@ -45,8 +47,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     assert_select 'img.gravatar', count: 30
 
     User.paginate(page: 1).each do |user|
-      assert_select 'a[href=?]', user_path(user), text: user.name  if user.activated?
+      assert_select 'a[href=?]', user_path(user), text: user.name if user.activated?
     end
   end
-
 end

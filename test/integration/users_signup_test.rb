@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
@@ -7,10 +9,10 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   test 'invalid signup attempt' do
     get signup_path
     assert_no_difference 'User.count' do
-      post users_path, params: {user: {name: '',
-                                       email: 'user@invalid',
-                                       password: '4444',
-                                       password_confirmation: '4441'}}
+      post users_path, params: { user: { name: '',
+                                         email: 'user@invalid',
+                                         password: '4444',
+                                         password_confirmation: '4441' } }
     end
     assert_template 'users/new'
     assert_select 'div.field_with_errors'
@@ -19,10 +21,10 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   test 'valid signup attempt' do
     get signup_path
     assert_difference 'User.count' do
-      post users_path, params: {user: {name: 'El Jefe',
-                                       email: 'user@valid.com',
-                                       password: '7777777',
-                                       password_confirmation: '7777777'}}
+      post users_path, params: { user: { name: 'El Jefe',
+                                         email: 'user@valid.com',
+                                         password: '7777777',
+                                         password_confirmation: '7777777' } }
     end
     follow_redirect!
     # assert_template 'users/show'
@@ -34,26 +36,26 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     ActionMailer::Base.deliveries.clear
   end
 
-  test "invalid signup information" do
+  test 'invalid signup information' do
     get signup_path
     assert_no_difference 'User.count' do
-      post users_path, params: {user: {name: "",
-                                       email: "user@invalid",
-                                       password: "foo",
-                                       password_confirmation: "bar"}}
+      post users_path, params: { user: { name: '',
+                                         email: 'user@invalid',
+                                         password: 'foo',
+                                         password_confirmation: 'bar' } }
     end
     assert_template 'users/new'
     assert_select 'div#error_explanation'
     assert_select 'div.field_with_errors'
   end
 
-  test "valid signup information with account activation" do
+  test 'valid signup information with account activation' do
     get signup_path
     assert_difference 'User.count', 1 do
-      post users_path, params: {user: {name: "Example User",
-                                       email: "user@example.com",
-                                       password: "password",
-                                       password_confirmation: "password"}}
+      post users_path, params: { user: { name: 'Example User',
+                                         email: 'user@example.com',
+                                         password: 'password',
+                                         password_confirmation: 'password' } }
     end
     # assert_equal 1, ActionMailer::Base.deliveries.size
     user = assigns(:user)

@@ -27,8 +27,8 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get edit_user_path(@user)
     assert_template 'users/edit'
-    name  = "Michael Dalton"
-    email = "jazzgarlicfan@yahoo.com"
+    name  = 'Michael Dalton'
+    email = 'jazzgarlicfan@yahoo.com'
     patch user_path(@user), params: {
       user: {
         name: 'Michael Dalton',
@@ -70,7 +70,4 @@ class UsersEditTest < ActionDispatch::IntegrationTest
                                               email: @user.email } }
     assert_redirected_to root_url
   end
-
-
-
 end

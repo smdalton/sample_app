@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class MicropostTest < ActiveSupport::TestCase
@@ -30,7 +32,4 @@ class MicropostTest < ActiveSupport::TestCase
   test 'order should be most to least recent' do
     assert_equal microposts(:most_recent), Micropost.first
   end
-
-
-
 end

@@ -1,7 +1,7 @@
-class PasswordResetsController < ApplicationController
+# frozen_string_literal: true
 
-  def new
-  end
+class PasswordResetsController < ApplicationController
+  def new; end
 
   def create
     @user = User.find_by(email: params[:password_reset][:email].downcase)
@@ -11,12 +11,10 @@ class PasswordResetsController < ApplicationController
       flash[:info]
       redirect_to root_url
     else
-      flash.now[:danger] = "Email address not found"
+      flash.now[:danger] = 'Email address not found'
       render 'new'
     end
   end
 
-  def edit
-
-  end
+  def edit; end
 end

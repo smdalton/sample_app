@@ -1,14 +1,15 @@
-class SessionsController < ApplicationController
+# frozen_string_literal: true
 
+class SessionsController < ApplicationController
   # gets go here
   def new
     # debugger
-
   end
+
   # posts go here
   def create
     @user = User.find_by(email: params[:session][:email].downcase)
-    if @user && @user.authenticate(params[:session][:password])
+    if @user&.authenticate(params[:session][:password])
       if @user.activated?
         forwarding_url = session[:forwarding_url]
         reset_session
@@ -16,8 +17,8 @@ class SessionsController < ApplicationController
         log_in @user
         redirect_to forwarding_url || @user
       else
-        message  = "Account not activated. "
-        message += "Check your email for the activation link."
+        message  = 'Account not activated. '
+        message += 'Check your email for the activation link.'
         flash[:warning] = message
         redirect_to root_url
       end
@@ -31,7 +32,4 @@ class SessionsController < ApplicationController
     log_out if logged_in?
     redirect_to root_url
   end
-
-  private
 end
-

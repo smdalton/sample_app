@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class UserShowTest < ActionDispatch::IntegrationTest
@@ -8,7 +10,6 @@ class UserShowTest < ActionDispatch::IntegrationTest
     @inactive_user = users(:inactive)
     @active_user = users(:archer)
   end
-
 
   test 'should display user when activated' do
     get user_path(@active_user)
