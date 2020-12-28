@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app was completed according to the instructions provided By Michael Hartl in his accompanying course at railstutorial.org
 
-Things you may want to cover:
+I completed all work myself and implemented all unit testing examples, as well as the supplementary exercises at the end of each chapter so I could learn as much as possible about Ruby on Rails.
 
-* Ruby version
+Topics that were covered and completed:
 
-* System dependencies
+* Authentication framework from scratch
 
-* Configuration
+* Static site routing and template inheritance through partials
 
-* Database creation
+* Deployment to heroku
 
-* Database initialization
+* Using fixtures, integration tests, unit tests, and best practices to increase code quality as much as possible
 
-* How to run the test suite
+* Doing things the *rails way* and how it creates consistent code that works well across teams
 
-* Services (job queues, cache servers, search engines, etc.)
+* Implementing advanced many-many relationships and specifiy through models as well as custom relationship accessors
 
-* Deployment instructions
+* Rails parameter passing scheme and accessing variables inside and outside of views
 
-* ...
+* Management of deployment, development, and testing environments
+
+
+Things that were skipped:
+
+* email verification altough debug mailers were checked and functional
